@@ -1,0 +1,109 @@
+                                                            ## What Are Log Files and Why Are They Useful
+# Log files are files that contain historical records of events and other data from an application. Some common examples of events that you may find in a log file:
+
+      Login attempts or failures
+      Traffic on a network
+      Things (website URLs, files, etc.) that have been accessed
+      Password changes
+      Application errors (used in debugging)
+      and many, many more
+
+# By making a historical record of events that have happened, log files are extremely important pieces of evidence when investigating:
+
+    What has happened?
+    When has it happened?
+    Where has it happened?
+    Who did it? Were they successful?
+    What is the result of this action?
+    
+
+                                                    ## What Does a Log File Look Like?
+                                                    
+# Log files come in all shapes and sizes. However, a useful log will contain at least some of the following attributes:
+
+1. A timestamp of the event (I.e. Date & Time)
+2. The name of the service that is generating the logfile (I.e. SSH is a remote device management protocol that allows a user to login into a system remotely)
+3. The actual event the service logs (i.e., in the event of a failed authentication, what credentials were tried, and by whom? (IP address)).
+
+                                                  ## Common Locations of Log Files
+<> Windows
+
+# ﻿Windows features an in-built application that allows us to access historical records of events that happen. The Event Viewer.
+
+
+   Category                                                     Example
+   
+1. Aplication                                          The service "tryhackme.exe" was restarted.
+2. Security                                            User "cmnatic" successfully logged in.
+3. Setup                                               The system must be restarted before "KB10134" can be installed.
+4. System                                              The system unexpectedly shutdown due to power issues.
+
+
+<> Linux (Ubuntu/Debian)
+
+# ﻿On this flavour of Linux, operating system log files (and often software-specific such as apache2) are located within the /var/log directory. 
+
+# The following table highlights some important log files:
+
+
+  Category                                        File                          Example
+
+1. Authentication                               auth.log                    Failed password for root from 192.168.1.35 port 22 ssh2.
+2. Package Management                           dpkg.log                    2022-06-03 21:45:59 installed neofetch.
+3. Syslog                                       syslog                      2022-06-03 13:33:7 Finished Daily apt download activities..
+4. Kernel                                       kern.log                    2022-06-03 10:10:01 Firewalling registered
+
+
+                                        ## Looking Through Log Files
+# Log files can quickly contain many events and hundreds, if not thousands, of entries. The difficulty in analysing log files is separating useful information from useless.
+# Tools such as Splunk are software solutions known as Security Information and Event Management (SIEM) is dedicated to aggregating logs for analysis. 
+
+
+<> Advantage 
+# SIEM platforms are dedicated services for log analysis.
+# SIEM platforms can collect a wide variety of logs - from devices to networking equipment.
+# SIEM platforms allow for advanced, in-depth analysis of many log files at once.
+
+<> Disadvantage
+# Commercial SIEM platforms are expensive to license and run.
+# SIEM platforms take considerable time to properly set up and configure.
+# SIEM platforms require training to be properly used.
+
+## Luckily for us, most operating systems already come with a set of tools that allow us to search through log files. In this room, we will be using the grep command on Linux.
+
+<> ﻿Grep 101
+# Grep is a command dedicated to searching for a given text in a file. 
+# Grep takes a given input (a text or value) and searches the entire file for any text that matches our input. 
+
+
+    Option                       Example
+1.   -i                          grep -i "helloworld" log.txt and grep -i "HELLOWORLD" log.txt will return the same matches.
+2.   -E                          grep -E "thm|tryhackme" log.txt
+3.   -i                          grep -r "helloworld" mydirectory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
