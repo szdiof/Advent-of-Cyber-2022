@@ -8,6 +8,7 @@
 2) Extract strings
 ----> Strings are ASCII and Unicode-printable sequences of characters within a file.
 -----> We are interested in the strings embedded in the file that could lead us to suspicious domains.
+------> Use the strings function from the left panel to extract the strings by dragging it to panel 3 and selecting All printable chars as shown below:
 
 3) Remove Pattern
 ---> Attackers often add random characters to obfuscate the actual value. If we examine, we can find some repeated characters [ _ ].
