@@ -1,0 +1,39 @@
+                                                      ## CyberChef Overview 
+# CyberChef is a web-based application - used to slice, dice, encode, decode, parse and analyze data or files.
+
+                                            
+                                                  ## Using CyberChef for mal doc analysis
+1) Add the File to CyberChef
+
+2) Extract strings
+----> Strings are ASCII and Unicode-printable sequences of characters within a file.
+-----> We are interested in the strings embedded in the file that could lead us to suspicious domains.
+
+3) Remove Pattern
+---> Attackers often add random characters to obfuscate the actual value. If we examine, we can find some repeated characters [ _ ].
+---> As these characters are common in different places, we can use regex (regular expressions) within the Find / Replace function to find and remove these repeated characters.
+---> To use regex, we will put characters within the square brackets [ ] and use backslash \ to escape characters. In this case, the final regex will be [\[\]\n_] where \n represents the Line feed, as shown below:
+
+4) Drop Bytes
+---> To get access to the base64 string, we need to remove the extra bytes from the top. Let's use the Drop bytes function and keep increasing the number until the top bytes are removed. 
+
+5) Decode base64
+
+6) Decode UTF-16
+---> In general, the PowerShell scripts use the Unicode UTF-16LE encoding by default. We will be using the Decode text function to decode the result into UTF-16E, as shown below:
+
+7) Find and Remove Common Patterns
+---> Forensic McBlue observes various repeated characters  ' ( ) + ' ` " within the output, which makes the result a bit messy. Let's use regex in the Find/Replace function again to remove these characters, as shown below. The final regex will be ['()+'"`].
+
+8) Find and Replace 
+---> If we examine the output, we will find various domains and some weird letters ]b2H_ before each domain reference. A replace function is also found below that seems to replace this ]b2H_ with http. 
+
+9) Extract URLs
+--> The result clearly shows some domains, which is what we expected to find. We will use the Extract URLs function to extract the URLs from the result, as shown below:
+
+10) Split URLs with @
+
+11) Defang URL
+---> Before passing these domains to the SOC team for deep malware analysis, it is recommended to defang them to avoid accidental clicks. Defanging the URLs makes them unclickable.
+
+
