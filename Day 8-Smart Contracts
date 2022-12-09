@@ -82,7 +82,25 @@ Part C:
 Site: https://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.7+commit.e28d00a7.js
 
                                           
-                                          
+  Example: 
+  <> Importing the Necessary Contracts
+  1. To do this, navigate to file explorer → default_workspace → load a local file into the current workspace. From here, you can select the necessary .sol files to be imported. We have provided you with an EtherStore.sol and Attack.sol file that functions as we introduced in this section.
+  
+  <> Compiling the Contracts
+  1. The next step is to compile the contracts, navigate to the solidity compiler, and select 0.8.10+commitfcxxxxxx from the dropdown compiler menu.
+  
+  <> Deploying and Interacting with Contracts
+  
+  Step 1: Select the contract you want to deploy from the contract dropdown menu under label 6.
+  Step 2: Deploy the contract by pressing the deploy button.
+  
+  Note: you need to provide a reference to the contract you are targeting before deploying the attack contract. To accomplish this, copy the address for EtherStore from label 11 and paste the value in the textbox under label 8.
+  
+ Step 3: Confirm the contract was deployed and the attack function can be seen from the deployed contracts subsection.
+ Step 4: Execute and/or interact with the contract’s function; note that most functions require some form of value input to execute a function properly.
+  
+  
+  
                                           
 
 
