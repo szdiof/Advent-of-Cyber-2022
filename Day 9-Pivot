@@ -26,7 +26,7 @@ sessions -u -1
 
 
 # interact with a session
-sessions -i session_id
+sessions -u session_id
 
 
 # Background the currently interactive session, and go back to the Metasploit prompt
