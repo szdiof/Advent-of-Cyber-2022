@@ -105,7 +105,34 @@ run
 
 <> You can also directly set options from the run command:
 
+# use admin/postgres/postgres_sql
+# run postgres://user:password@MACHINE_IP/database_name sql='select version()'
 
+
+                                      ## Using Meterpreter to pivot
+                                      
+# Metasploit has an internal routing table that can be modified with the route command.
+# Metasploit has an internal routing table that can be modified with the route command.
+# This routing table determines where to send network traffic through, for instance, through a Meterpreter session.
+# This way, we are using Meterpreter to pivot: sending traffic through to other machines on the network.
+
+Note that Meterpreter has a separate route command, which is not the same as the top-level Metasploit prompt's route command described below. If you are currently interacting with a Meterpreter session, you must first background it.
+
+# Example usage
+route [add/remove] subnet netmask [comm/sid]
+
+# Configure the routing table to send packets destined for 172.17.0.1 to the latest opened session
+route add 172.17.0.1/32 -1
+
+# Configure the routing table to send packets destined for 172.28.101.48/29 subnet to the latest opened session
+route add 172.28.10.48/29 -1
+
+# Output the routing table
+route print
+
+ 
+                                                      ## Socks Proxy
+#                                                       
 
 
 
