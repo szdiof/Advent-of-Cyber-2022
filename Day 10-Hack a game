@@ -9,7 +9,26 @@
 Site: https://github.com/Qwokka/Cetus/releases/download/v1.03.1/Cetus_v1.03.1.zip
 
                                                         ## The Mighty Cetus
-# Cetus is a simple browser plugin that works for Firefox and Chrome, allowing you to explore the memory space of Web Assembly games that run in your browser. 
+# Cetus is a simple browser plugin that works for Firefox and Chrome, allowin
+g you to explore the memory space of Web Assembly games that run in your browser. 
 # The main idea behind it is to provide you with the tools to easily find any piece of data stored in memory and modify it if needed.
 # On top of that, it will let you modify a game's compiled code and alter its behaviours if you want, although we won't need to go that deep for this task.
-# 
+
+
+                                              ## Installing Cetus on Firefox 
+                                              
+# To run Cetus on Firefox, you will need to load it as a temporary extension since it isn't available on the add-ons website.
+# To do this, open Firefox and type about:debugging in the address bar. 
+# Once in there, go to This Firefox, where you'll find a button to load temporary add-ons. 
+# Temporary add-ons will only be loaded for as long as the browser remains open, so you'll need to load it again if you close it for some reason:
+# To load the extension, you will need to browse to the directory where you downloaded and extracted Cetus and select the manifest.json file inside the main folder and click OK:
+
+                                          
+                                              ## Installing Cetus on Chrome
+                                              
+# To install Cetus on Chrome, type chrome://extensions in your address bar.
+# This will take you to the extensions manager.
+# You will need to enable the Developer mode, enabling additional buttons to load the extension.
+# Click the Load unpacked button and point to the directory where you uncompressed the plugin.
+# Once you are done, you should see Cetus loaded in your extensions:
+                                          
