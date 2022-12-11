@@ -1,0 +1,15 @@
+                                                      ## The Memory of a Program
+                                                      
+# Whenever we execute a program, all data will be processed somehow through the computer's RAM (Random Access Memory). 
+# If you think of a videogame, your HP, position, movement speed and direction are all stored somewhere in memory and updated as needed as the game goes. 
+# If you can modify the relevant memory positions, you could trick the game into thinking you have more HP than you should or even a higher score! This sounds relatively easy, but a program's memory space is vast and sparse, and finding the location where these variables are stored is nothing you'd want to do by hand. 
+# Hopefully, some tools will help us navigate memory and find where all the juicy information is at.
+# All you need for this challenge is available in the deployable machine. If you prefer to do so, however, you can download and install Cetus on your own machine by downloading it from here.
+
+Site: https://github.com/Qwokka/Cetus/releases/download/v1.03.1/Cetus_v1.03.1.zip
+
+                                                        ## The Mighty Cetus
+# Cetus is a simple browser plugin that works for Firefox and Chrome, allowing you to explore the memory space of Web Assembly games that run in your browser. 
+# The main idea behind it is to provide you with the tools to easily find any piece of data stored in memory and modify it if needed.
+# On top of that, it will let you modify a game's compiled code and alter its behaviours if you want, although we won't need to go that deep for this task.
+# 
