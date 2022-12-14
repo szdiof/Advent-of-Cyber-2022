@@ -48,7 +48,12 @@ Examples:
 # Before proceeding with our analysis, we need to confirm the Operating System of the device that the memory has been captured from. We need to confirm this because it will determine what plugins we can use in our investigation.
 # First, let's use the imageinfo plugin to analyse our memory dump file to determine the Operating System. To do this, we need to use the following command (remembering to include our memory dump by using the -f option):
 -----> python3 vol.py -f workstation.vmem windows.info
-# 
+
+Commands: 
+1. python3 vol.py -f workstation.vmem windows.pslist - This plugin lists all of the processes that were running at the time of the capture.
+2. python3 vol.py -f workstation.vmem windows.psscan  - This plugin allows us to analyse a specific process further.
+3. python3 vol.py -f workstation.vmem windows.dumpfiles - This plugin allows us to export the process, where we can perform further analysis (i.e. static or dynamic analysis).
+4. windows.netstat - This plugin lists all network connections at the time of the capture.
 
 
 
