@@ -1,0 +1,60 @@
+                                                  ## What is Memory Forensics?
+                                                  
+# Memory forensics is the analysis of the volatile memory that is in use when a computer is powered on.
+# Computers use dedicated storage devices called Random Access Memory (RAM) to remember what is being performed on the computer at the time.
+# RAM is extremely quick and is the preferred method of storing and accessing data. 
+# However, it is limited compared to storage devices such as hard drives. This type of data is volatile because it will be deleted when the computer is powered off.
+# RAM stores data such as your clipboard or unsaved files. 
+
+
+                                                    ## Why is Memory Forensics Useful?
+                                                    
+# Memory forensics is an extremely important element when investigating a computer. 
+# A memory dump is a full capture of what was happening on the Computer at the time, for example, network connections or things running in the background.
+# Most of the time, malicious code attempts to hide from the user. However, it cannot hide from memory.
+
+                                                ## An Introduction to Processes
+                                                
+# At the simplest, a process is a running program. For example, a process is created when running an instance of notepad.
+# You can have multiple processes for an application (for example, running three instances of notepad will create three processes). 
+# This is important to know because being able to determine what processes were running on the computer will tell us what applications were running at the time of the capture.
+
+                                            ## Introducing Volatility
+                                            
+# Volatility is an open-source memory forensics toolkit written in Python.
+# Volatility allows us to analyse memory dumps taken from Windows, Linux and Mac OS devices and is an extremely popular tool in memory forensics.
+# For example, Volatility allows us to:
+
+    1.List all processes that were running on the device at the time of the capture
+    2.List active and closed network connections
+    3.Use Yara rules to search for indicators of malware
+    4.Retrieve hashed passwords, clipboard contents, and contents of the command prompt
+    5.And much, much more!
+    
+# Once Volatility and its requirements (i.e. Python) are installed, Volatility can be run using python3 vol.py. The terminal below displays Volatility's help menu:
+
+Examples:
+
+1. python3 vol.py -f /path/to/my/memorydump.vmem
+2. python3 vol.py -v 
+3. python3 vol.py -p /path/to/my/custom/plugins  --This argument allows you to override the default location of where plugins are stored.
+4. python3 vol.py -o /output/extracted/files/here
+
+
+<> Volatility documentation: https://volatility3.readthedocs.io/en/latest/volatility3.plugins.html
+
+                                                ## Using Volatility to Analyse an Image
+                                                
+# Before proceeding with our analysis, we need to confirm the Operating System of the device that the memory has been captured from. We need to confirm this because it will determine what plugins we can use in our investigation.
+# First, let's use the imageinfo plugin to analyse our memory dump file to determine the Operating System. To do this, we need to use the following command (remembering to include our memory dump by using the -f option):
+-----> python3 vol.py -f workstation.vmem windows.info
+# 
+
+
+
+
+
+
+
+    
+
