@@ -130,7 +130,12 @@ Voter Records
                                               ## Social Media OSINT
 <> Twitter OSINT
 1. #hashsearch or "Something to search"
-2. from:cybermentor                                          
+2. from:szdiof  // who szdiof is talking to     
+3. to:szdiof   // Who is talking to szdiof
+4. @szdiof  // Anyone who is tagging szdiof
+5. from:szdiof since:2019-02-01 until:2017-09-01
+6. from:szdiof cybersecurity //Did Abdulrazack Ever say cybersecurity
+
 
                                           
                                           
