@@ -72,6 +72,75 @@ Note: You can use the OSINT tools mentioned on Day 6 to conduct a reputation che
 
 
 
+    Checks to do
+        DNS queries
+        DNS answers
+        
+    Questions to answer
+        Which domain addresses are communicated?
+        Do the communicated domain addresses contain unusual or suspicious destinations? 
+        Do the DNS queries look unusual, suspicious or malformed?
+
+<> Use the HTTP filter to filter and view the HTTP packets.
+# Click on the first packet and view the details. In HTTP, the "GET Request" is used by the client to send a request to a server. Usually, this request ends up with receiving data/resources. Therefore, we will look at these requests to see if any endpoint is asked for a resource from other servers over the HTTP protocol. 
+# Apply the filter and expand the Hypertext Transfer Protocol section. 
+---> Expand the subsections as well and focus on the GET requests. You will find the requested resource paths under the Full Request URI section. Also, you can evaluate the user-agent section to check if there is anomalous or non-standard user-agent info. 
+---> See the below example and continue on analysis by analysing all available HTTP packets.
+
+Before continuing to the next steps, ensure you have completed the following checks and answered the analysis questions.
+
+    Checks to do
+        HTTP GET requests
+        Requested URIs
+        HTTP requests host addresses
+        Used user-agents
+    Questions to answer
+        Which addresses are communicated?
+        Is there any resource share event between addresses?
+        If there is a file share event, which addresses hosts which files?
+        Do the user-agent fields look unusual, suspicious or malformed?
+        
+<> Use the "File --> Export Object --> HTTP" menu to extract files shared over the HTTP.
+
+# Look at the results. There are two files shared over the HTTP. Use the Save All option and save them on the desktop. Now close/minimise the Wireshark GUI and open a terminal window on the desktop. 
+Use the sha256sum and VirusTotal tools shown on Day 6 to calculate the file hash value and to conduct hash-based file reputation analysis. 
+
+    Checks to do
+        Shared files
+        File hashes (SHA256)
+        Hash reputation check
+        
+    Questions to answer
+        What are shared files?
+        Does the hash reputation marked as suspicious or malicious?
+        Which domain hosts the suspicious/malicious file?
+        
+        
+<> After completing the demonstrated steps, we verified that one shared file was malicious. Before concluding the analysis, you need to correlate the findings and recall which address was hosting the malicious file.
+
+Your report should include the following information you collected in this task.
+
+    Suspicious IP addresses associated with Bandit Yeti APT
+    Suspicious domain addresses associated with Bandit Yeti APT
+    Connection with suspicious addresses
+    Requested URIs
+    Used user-agents
+    Shared file names, extensions and hashes
+    Server names hosted the shared files
+    
+    
+    
+        
+
+ 
+ 
+        
+        
+        
+        
+
+
+
 
 
 
