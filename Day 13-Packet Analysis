@@ -1,0 +1,48 @@
+                                                      ## Packets and Packet Analysis?
+                                                      
+# Packets are the most basic unit of the network data transferred over the network. 
+# When a message is sent from one host to another, it is transmitted in small chunks; each called a packet. 
+# Packet analysis is the process of extracting, assessing and identifying network patterns such as connections, shares, commands and other network activities, like logins, and system failures, from the prerecorded traffic files.    
+
+
+                                                      ## Why Does Packet Analysis Still Matter?
+                                                      
+# Network traffic is a pure and rich data source. A Packet Capture (PCAP) of network events provides a rich data source for analysis.
+# Capturing live data can be focused on traffic flow, which only provides statistics on the network traffic.
+# On the other hand, identifying and investigating network patterns in-depth is done at the packet level. Consequently, threat detection and real-time performance troubleshooting cannot be done without packet analysis.
+# Today, most network-based detection mechanisms and notification systems ingest and parse packet-level information to create alerts and statistical data.
+# Also, most red/blue/purple teaming exercises are optimised with packet-level analysis.
+# Lastly, even encoded/encrypted network data still provides value by pointing to an odd, weird, or unexpected pattern or situation, highlighting that packet analysis still matters.
+
+
+                                              ## Points to consider when working with PCAPs
+                                              
+# There are various points to consider before conducting packet analysis. The essential points are listed below.
+
+1. Network and standard protocols knowledge. --> Knowledge of the network and protocol operations is a must. An analyst must know how the protocols work and which protocol provides particular information that needs to be used for analysis. Also, knowing the "normal" and "abnormal" behaviours and patterns is a big plus! 
+2. Familiarity with attack and defence concepts. --> You can't detect what you don't know. An analyst must know "how the attacks are conducted" to identify "what is happening" and decide "where to look".
+3. Practical experience in analysis tools. --> You can't burn down the haystack to find a needle! An analyst must know how to use the tools to extract particular information from packet bytes.
+
+
+                                            ## What is Wireshark and How to Use It?
+                                            
+# Wireshark is an industry-standard tool for network protocol analysis and is essential in any traffic and packet investigation. You can view, save and break down the network traffic with it. You can learn more about Wireshark by completing the Wireshark module().
+# After opening a pcap file for the first time, it might look daunting to decide where to focus. 
+--> Breaking down all the packets in a tree-based view will make the analysis easier.
+--> Statistics will show the overall usage of the ports and services, so it will be slightly easier to see the big picture in the capture file.
+
+<>  Use the "Statistics --> Protocol Hierarchy" menu to view the overall usage of the ports and services.
+
+Now, look at the output. The majority of the traffic is on TCP and HTTP: 
+
+
+
+
+
+
+
+
+
+
+
+
