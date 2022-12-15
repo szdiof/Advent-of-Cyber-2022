@@ -37,7 +37,38 @@ Now, look at the output. The majority of the traffic is on TCP and HTTP:
 
 
 
+<> You can also view the connections by IP and TCP/UDP protocols to view the overall usage of the ports and services (including the total packet numbers transferred over a particular port and between two hosts). 
+---> The next step is viewing the IP conversations to spot if there is a weird/suspicious/not usual IP address in use.
 
+# Close the protocol hierarchy window, use the "Statistics --> Conversations" section and navigate to the IPv4 section to view the list of IP conversations. 
+
+Note: Navigate to the TCP/UDP sections to view the TCP/UDP conversation details.
+
+<> Now we have a detailed list of the IP addresses, port numbers, and the number of packets transferred from one endpoint to another. This information will help us identify suspicious IP addresses, connections and ports.
+# Let's analyse the findings in this section; navigate to the TCP part and look at the results, the port 80 is used as a communication medium in TCP. Port 80 represents the HTTP service. Next, you can view that DNS service is also used by navigating to the UDP section
+
+Checks to do
+
+    Packet statistics
+    Service identification
+    IP reputation check
+    
+Questions to answer
+
+    Which IP addresses are in use?
+    Has a suspicious IP address been detected?
+    Has suspicious port usage been detected?
+    Which port numbers and services are in use?
+    Is there an abnormal level of traffic on any port or service?
+
+Note: You can use the OSINT tools mentioned on Day 6 to conduct a reputation check on suspicious IP/domain addresses. Note that you can't rely on the reputation check if nothing suspicious is detected at this stage.You still need to go further to discover potential anomalies. Also, if you can't recall or identify the port numbers and service names, you can use the "Google Dorks" search techniques shown on Day 3 to search and learn port numbers and service names.
+
+# Now let's focus on the HTTP and DNS. As a nature of these protocols, everything transferred over these protocols is cleartext. At this stage, filtering the DNS packets to view the interacted domains is a good start before deep diving into cleartext data.
+------>  Close the statistics window, and type DNS in the search bar to apply a filter and view the DNS packets.
+
+# DNS packets will help us to identify connected domain addresses to decide if they are affiliated with the suspicious threat and Bandit Yeti APT! Click on the first packet and use the lower left section of the tool (Packet Details Pane) to view the packet details. 
+# There are multiple collapsed sections; click on the Domain Name System section to expand and view the DNS details of the packets.
+# There are additional collapsed sections under the corresponding section; expand them to view all available details. You will find the interacted domain under the queries section.
 
 
 
