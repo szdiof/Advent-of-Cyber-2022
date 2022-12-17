@@ -129,6 +129,7 @@ Voter Records
                                           
                                               ## Social Media OSINT
 <> Twitter OSINT
+
 1. #hashsearch or "Something to search"
 2. from:szdiof  // who szdiof is talking to     
 3. to:szdiof   // Who is talking to szdiof
@@ -136,6 +137,16 @@ Voter Records
 5. from:szdiof since:2019-02-01 until:2017-09-01
 6. from:szdiof cybersecurity //Did Abdulrazack Ever say cybersecurity
 7. geocode:3.33907,35.67861,1km // Any tweet from Tanzania Karatu within 1km
+
+<> Twitter OSINT Tools
+
+1. https://socialbearing.com/
+2. http://twitonomy.com/
+3. http://sleepingtime.org/
+4. http://analytics.mentionmapp.com/?v=free
+5. https://tweetbeaver.com/
+6. 
+
 
 
                                           
