@@ -1,0 +1,118 @@
+                                                      ## SQL Refresher
+                                                      
+# Structured Query Language (SQL) is the traditional language used to ask databases for information. 
+# When you build any application that relies on a database, the app will need to create SQL sentences on the fly and send them to the database engine to retrieve the required information for your app to work.
+# Luckily for you, SQL was built with simplicity in mind, and its syntax is supposed to resemble straightforward English sentences to make it easier for programmers to understand.         
+
+# But before explaining the SQL syntax, let's talk about the specific database engine used on our app: MySQL. 
+# MySQL stores information in structures called tables. Think of them as any table in a spreadsheet document where you have columns and rows.
+# For clarity, let's check one of the tables in use in the current application where the toys are stored:       
+
+1. SELECT * FROM toys;
+2. SELECT name, quantity FROM toys;
+3. SELECT name, quantity FROM toys WHERE quantity >= 20;
+
+
+                                                       ## Sending SQL Queries from PHP
+                                                       
+# Now that we understand how a SELECT statement works, let's see how a PHP application builds and sends such a query to MySQL. 
+# Although we are focusing on PHP and MySQL, the same idea generally applies to other programming languages.   
+
+$server="db";
+$user="logistics_user";
+$pwd="somePass123";
+$schema="logistics";
+
+$db=mysqli_connect($server,$user,$pwd,$schema);
+
+# Once the connection is made, we can issue SQL queries using the mysqli_query() function. 
+# The first parameter we pass to the function is the connection handler we got before, and the second parameter is a string with our SQL query:
+
+$query="select * from users where id=1";
+$elves_rs=mysqli_query($db,$query);
+
+
+                                              ## Building Dynamic Websites
+Example: http://LAB_WEB_URL.p.thmlabs.com/webapp/elf.php?id=2
+
+# Depending on the number you put on the id parameter of the URL, you get served the profile of a different elf.
+# Behind the curtains, this works by creating an SQL query that embeds the id parameter value and returns the information on the corresponding elf. 
+
+
+In code, it would look like this:
+
+$query="select * from users where id=".$_GET['id'];
+$elves_rs=mysqli_query($db,$query);
+
+# The first line builds an SQL query by concatenating the $_GET['id'] variable as part of the where clause.
+# Note that in PHP, you can access any parameter in the URL as $_GET['name_of_parameter'].
+# This query will ask the database for all columns of the table users that correspond to the elf with a specific id.
+# The second line sends the query and returns the information of one particular elf as a result set that we store in the $elves_rs variable.
+# The rest of the website then parses the result set and renders the page accordingly.
+
+
+                                          ## SQL Injection (SQLi)
+                                          
+# The problem with the method shown before is that it takes untrusted input from the user and concatenates it to an SQL query without any questions asked.
+#  As seen in the previous day's task, our app should thoroughly validate any input the user sends before using it. If it doesn't, unexpected things may happen.
+
+Example:  
+
+# If the attacker sends the following through the id parameter of the URL:
+http://lab_web_url.p.thmlabs.com/webapp/elf.php?id=-1%20OR%20id%20=%204
+                                          
+# When PHP concatenates "-1 OR id = 4" to our SQL statement, it will end up with this query:
+select * from users where id=-1 OR id = 4
+
+# Suddenly, the attacker has injected some SQL syntax that, when concatenated to our original query, ends up serving the data of the elf with id=4 for some weird reason. 
+# If we read the resulting query string, we can see that our WHERE clause was modified to filter only the elves that either have id=-1 or id=4. Since the id values used by the database are likely all positive numbers, no elf will match id=-1. 
+# Therefore, the database will only return the elf with id=4.
+
+
+                                          ## Fixing the App With Elf Exploit and Elf Admin
+<> Fixing SQLi by Data Type Validation
+# One of the easiest and most effective ways to prevent SQL injections is to ensure that any data that the user can manipulate that you are concatenating as part of an SQL statement is actually from the type you expect.
+# Elf Exploit should tell you that he successfully injected some SQL via the id parameter of elf.php.
+
+$query="select * from users where id=".$_GET['id'];
+$elves_rs=mysqli_query($db,$query);
+
+# The website takes the id parameter from the URL and concatenates it to an SQL query, as shown before.
+# We can reasonably assume that the website expects an integer id to be sent.
+# To avoid injections, we can convert whatever the user inputs in the id parameter to an integer.
+# For this purpose, we will be using the intval() function. This function will take a string and try to convert it into an integer.
+# If no valid integer is found on the string, it will return 0, which is also an integer. 
+# To clarify this, let's look at some values and how they would be converted:
+
+intval("123") = 123
+intval("tryhackme") = 0
+intval("123tryhackme") = 123
+
+# Putting this to use, we can modify line 4 of elf.php to look like this:
+
+$query="select * from users where id=".intval($_GET['id']);
+
+
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
