@@ -56,7 +56,69 @@
     1. Ensure no invalid characters are present through proper encoding, and
     2. Whitelist expected characters and character sets
     
-#     
+# This is the reason why we haven’t touched the <textarea> field at the very end of the code block. As discussed earlier, free-form text is unique in such a way that applying syntax and semantic checks are pretty much impossible.
+
+
+                                                  ## Client-side vs Server-side
+                                                  
+# Our discussion until this point has been geared towards using input validation to ensure that the pieces of data that we're getting from the users are not garbage. Proper input validation on the client-side limits misuse and minimizes the attack surface of the application, however, it doesn't actively cover malicious use cases.
+# As opposed to the above examples of validating input implemented on the client-side, output escaping and using parametrized queries are implemented on the server-side, adding computational load to the server, but ultimately helping in securing the application as a whole.
+# This is done as an exercise of inherent distrust in the user-provided input despite validation. 
+
+# The example below uses the built-in htmlentities() PHP function to escape any character that can affect the application.
+
+$name = htmlentities($_GET['name'], ENT_QUOTES | ENT_HTML5, "UTF-8")
+
+# On the other hand, the one below uses the HTMLPurifier library to help with some use cases, such as our <textarea> conundrum above. 
+
+<? php
+require_once '/path/to/HTMLPurifier.auto.php'
+$config = HTMLPurifier_Config::createDefault();
+$purenow = new HTMLPurifier($config);
+
+$output $purenow->purify($input)
+
+?>
+
+# Both examples are done on the server-side to escape characters and purify content, respectively both effective ways to prevent user misuse and XSS attacks. 
+# Implementing both client and server-side validations ensure that no stones are left unturned.
+# This exact case highlights the importance of layering defenses and shows point-blank the limitation of client-side input validation.
+# It also gives rise to the notion that input validation is not a one-stop shop for securing your application.
+
+
+                                              ## Not All Solutions are Equal
+                                              
+# Input validation is an important layer of security that all production-level applications should have. However, no matter how ‘perfect’ your input validation is for your specific use case, there simply are limitations to all kinds of security implementations - and input validation is not exempt from it.                                              
+# You cannot make your application fully XSS-proof through input validation alone. 
+# Controls may be put in place at the input level that may lessen the attack surface of the application, but it doesn’t fully remediate it. 
+# Full remediation of an XSS vulnerability in your application requires additional layers of defenses, such as mitigation on the browser-level (via secure cookies, content-security-policy headers, etc.) and escaping and purifying user-provided input.                                              
+# In light of these remediation techniques, it makes sense to tackle each challenge on its own - SQL and LDAP-related vulnerabilities are addressed differently from XSS, so why try to fit them all in the same formula?                                     
+                                              
+
+
+                                                ## 
+
+
+
+
+
+
+
+
+
+
+
+
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
+                                                  
 
 
 
