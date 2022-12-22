@@ -1,0 +1,72 @@
+                                                            ## Threat Detection
+                                                            
+# Cyber threats and criminals have advanced tactics to ensure that they steal information and cause havoc. 
+# As you have already seen through the previous days, there are many ways in which this can be done. 
+# There are also ways for security teams to prepare their defences and identify these threats. 
+# What would be evident is that most of the blue-team activities will require proactive approaches to analysing different logs, malware and network traffic. 
+# This brings about the practice of threat detection.      
+
+                                  
+                                                          ## Attack Scenario
+<> Chopping Logs with Sigma Rules
+
+# Sigma is an open-source generic signature language developed by Florian Roth & Thomas Patzke to describe log events in a structured format. 
+# The format involves using a markup language called YAML, a designed syntax that allows for quick sharing of detection methods by security analysts. 
+# The common factors to note about YAML files include the following:
+
+    1.YAML is case-sensitive.
+    2.Files should have the .yml extension.
+    3.Spaces are used for indentation and not tabs.
+    4.Comments are attributed using the # character.
+    5.Key-value pairs are denoted using the colon : character.
+    6.Array elements are denoted using the dash - character.
+       
+<> Sigma was developed to satisfy the following scenarios:
+
+    1. To make detection methods and signatures shareable alongside IOCs and Yara rules.
+    2. To write SIEM searches that avoid vendor lock-in.
+    3. To share signatures with threat intelligence communities.
+    4. To write custom detection rules for malicious behaviour based on specific conditions.
+                                                          
+
+<> Sigma Rule Syntax
+# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          
+                                                          
