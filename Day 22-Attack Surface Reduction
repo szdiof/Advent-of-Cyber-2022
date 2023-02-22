@@ -1,0 +1,76 @@
+Learning Objectives
+
+To help McSkidy with her improvements, we will learn some concepts and evaluate some steps to take. These will include:
+
+    Understand what an attack vector is.
+    Understand the concept of the attack surface.
+    Some practical examples of attack surface reduction techniques that McSkidy can utilize to strengthen Santa's network.
+    
+							## Attack Vectors
+							
+# An attack vector is a tool, technique, or method used to attack a computer system or network.
+# If we map the attack vectors to the physical world, attack vectors would be the weapons an adversary uses, like, swords, arrows, hammers, etc. 
+# A non-exhaustive list of examples of attack vectors in cybersecurity includes the following: 	
+
+    1. Phishing emails; Deceptive emails that are often impersonating someone and asking the victim to perform an action that compromises their security.
+    2. Denial of Service (DoS) or Distributed Denial of Service (DDoS) attacks; Sending so many requests to a website or web application that it reaches its limits and can no longer serve legitimate requests.
+    3. Web drive-by attacks; Flaws in web browsers that compromise the security of the victim by merely visiting a website.
+    4. Unpatched Vulnerability exploitation; A flaw in the internet-facing infrastructure, such as the web server or the network interface, that is exploited to take control of the infrastructure.	
+    
+ 							## Attack Surface
+ 							
+# The attack surface is the surface area of the victim of an attack that can be impacted by an attack vector and cause damage. 
+# Taking forward our example of the physical world, the attack surface will include the unarmoured body of a soldier, which an attack of a sword, an arrow, or a hammer, etc., can damage. In cybersecurity, the attack surface will generally contain the following: 
+
+    1. An email server that is used for sending and receiving emails.
+    2. An internet-facing web server that serves a website to visitors.
+    3. End-user machines that people use to connect to the network.
+    4. Humans can be manipulated and tricked into giving control of the network to an attacker through social engineering.	
+    
+							## Attack Surface Reduction
+					
+# As we might notice, the attack surface can not be eliminated short of running away from the battlefield. It can only be reduced. 
+# The Greek Phalanx is an excellent example of attack surface reduction, as seen in the picture. In the picture, the front of the defending army is covered by their shields, whereas the walls of a pass cover the sides, leaving no room for an attacker to inflict damage on the defenders without running into their defenses. 
+# This is how the Spartan army could hold back a much larger Persian army for several days in the battle of Thermopylae.		
+# However, this attack surface reduction works for the weapons of that time. This technique will not impact the attack surface against modern weapons. 
+
+# In cybersecurity, the most secure computer is the one that is shut down and its cables removed. 
+# However, that is not feasible for running critical operations dependent on computers. 
+# Therefore, cybersecurity leaders aim to keep the operations running with the lowest possible attack surface. 
+# We can consider the goal as creating the digital equivalent of the Greek Phalanx.		
+							
+						
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+						
+					

